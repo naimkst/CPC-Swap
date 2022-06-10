@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Header() {
@@ -5,11 +6,16 @@ export default function Header() {
     <div className=" bg-slate-100">
       <div className="container flex items-center justify-between m-auto h-[80px]">
         <div>
-          <img src="/assets/images/logo.svg" alt="" />
+          <Link href="/">
+          
+          <img className="hover: cursor-pointer" src="/assets/images/logo.svg" alt="" />
+          </Link>
         </div>
         <div>
           <ul className="flex items-center justify-center gap-10">
+            <Link href="/swap">
             <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">Swap</li>
+            </Link>
             <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">Withdraw</li>
             <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">Deposite</li>
           </ul>
