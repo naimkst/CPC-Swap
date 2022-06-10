@@ -18,6 +18,9 @@ export default function Header() {
             </Link>
             <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">Withdraw</li>
             <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">Deposite</li>
+            <Link href="/blog">
+              <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">Blog</li>
+            </Link>
           </ul>
         </div>
         <div>
