@@ -37,6 +37,7 @@ export default function Header() {
     const setAddressLocal = localStorage.setItem("metamaskAddress", account);
   }
 
+  //Conenct to Metamask All Time
   const checkMetamask = async () => {
     // alert("Trigger!")
     const localData = localStorage.getItem("metamaskAddress");
@@ -54,6 +55,7 @@ export default function Header() {
     }
   };
 
+  //Address Change Event
   const getAddressLocal = async () => {
     if (library) {
       const { provider: ethereum } = library;
@@ -82,12 +84,14 @@ export default function Header() {
     }
   };
 
+  //Check Connection Active Or Not
   const checkActiveOrNot = async () => {
     if (active == false) {
       const setAddressLocal = localStorage.removeItem("metamaskAddress");
     }
   };
 
+  //Address Clipboard Function
   const copyAddress = async () => {
     console.log("copy");
     const addressGet = account;
@@ -95,6 +99,7 @@ export default function Header() {
     toast.success("🦄 Copy Successfull!");
   };
 
+  //Logout Or Disconnect Form Metamask
   const logOut = async () => {
     const setAddressLocal = await localStorage.removeItem(
       "metamaskAddress"
