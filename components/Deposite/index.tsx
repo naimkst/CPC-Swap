@@ -5,7 +5,7 @@ import type { NextPage } from "next";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { ethers } from "ethers";
 import contracts from "public/CpcToken.json";
-
+import { ToastContainer, toast } from "react-toastify";
 var crypto = require("crypto");
 
 export default function DepositeForm() {
@@ -43,9 +43,7 @@ export default function DepositeForm() {
             value: ethers.utils.parseUnits(tokenTotalPrice.toString(), "gwei"),
           }
         );
-        setSuccessMessage(
-          "Successfully purchase " + token + " tokens "
-        );
+   
       } catch (error: any) {
         setErrorMessage(error.message);
         console.log(error.message);
