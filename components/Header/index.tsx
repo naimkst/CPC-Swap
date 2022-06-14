@@ -141,12 +141,18 @@ export default function Header() {
                   Swap
                 </li>
               </Link>
+
+              <Link href="withdraw">
               <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">
                 Withdraw
               </li>
-              <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">
-                Deposite
-              </li>
+              </Link>
+
+              <Link href="deposite">
+                <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">
+                  Deposite
+                </li>
+              </Link>
               <Link href="/blog">
                 <li className="text-[16px] hover:text-[#5f4dbc] hover: cursor-pointer">
                   Blog
