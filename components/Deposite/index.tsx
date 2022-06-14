@@ -28,43 +28,23 @@ export default function DepositeForm() {
     if (active) {
       console.log("exicute");
       const signer = provider.getSigner();
-      const contractAddress = { account };
       const contract = new ethers.Contract(
         "0xBdfdAc75d450154737ec1C4d8D949884F7B21ae2",
         contracts.abi,
         signer
       );
       try {
-        const totalSupply = await contract.totalSupply();
-        const balance = await contract.balances(
-          "0x7eCe7F5B8a1B13af77ac40BCce96F6a697865d86"
-        );
-        const tokenPrice = await contract.tokenPrice();
-        const totalSale = await contract.totalSale();
-        const tokenAmount = await ethers.utils.formatEther(tokenPrice);
-        console.log("Total Sale", totalSale.toString());
-        console.log("Acount Balance", balance.toString());
-        const howManyToken: any = sendtoken;
-        const tokenTotalPrice: any = howManyToken * tokenPrice;
-        const parshValue = ethers.utils.formatUnits(tokenTotalPrice, "gwei");
-        const parshToken = ethers.utils.formatUnits(howManyToken, "ether");
-        console.log(
-          "TOken Price",
-          tokenTotalPrice,
-          "parse Valaue",
-          tokenTotalPrice,
-          "How Many Token",
-          parshToken
-        );
+       
+        const tokenTotalPrice: any = 10 * token;
+        console.log(tokenTotalPrice);
         const buytoken = await contract.buyToken(
-          ethers.utils.parseUnits(howManyToken),
+          ethers.utils.parseUnits(token),
           {
-            value: ethers.utils.parseUnits(parshValue, "ether"),
+            value: ethers.utils.parseUnits(tokenTotalPrice.toString(), "gwei"),
           }
         );
-        console.log("Ether Payment", buytoken);
         setSuccessMessage(
-          "Successfully purchase " + howManyToken + " tokens to " + account
+          "Successfully purchase " + token + " tokens "
         );
       } catch (error: any) {
         setErrorMessage(error.message);
@@ -79,7 +59,6 @@ export default function DepositeForm() {
     const getPrice = perTokenPrice * token;
     const totalPrice: any = ethers.utils.formatEther(getPrice.toString());
     setTotalAmount(totalPrice);
-    console.log(totalPrice);
   };
 
   useEffect(() => {
@@ -116,7 +95,7 @@ export default function DepositeForm() {
                 <p className="text-gray-500 text-sm font-semibold text-center m-auto">
                   Token Price:{" "}
                   <span className="text-[#5f4dbc]">
-                    0.001 X {token ? token : 0} = {totalAmount} ETH
+                  10 Wei X {token ? token : 0} = {totalAmount} ETH
                   </span>
                 </p>
               </div>
@@ -129,6 +108,10 @@ export default function DepositeForm() {
               >
                 Connect Wallet
               </button>
+
+              {errorMessage && <p className="error text-center mt-3 text-red-500">{errorMessage}dfd</p>}
+              {successMessage && <p className="success text-center mt-3 text-green-600">{successMessage}dfd</p>}
+
             </div>
           </div>
         </div>
