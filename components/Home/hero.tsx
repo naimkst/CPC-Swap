@@ -15,7 +15,7 @@ export default function Hero() {
             <button className=" bg-[#5f4dbc] hover:bg-[#3b24b0] text-white py-3 px-8 rounded-full">Instant Exchange</button>
           </div>
           <div className="flex justify-center">
-          <iframe width="700" height="350" src="https://www.youtube.com/embed/jECIZpEsX5s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="700" height="350" src="https://www.youtube.com/embed/jECIZpEsX5s" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
           </div>
         </div>
       </div>
