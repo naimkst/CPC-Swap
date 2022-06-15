@@ -93,6 +93,7 @@ export default function Header() {
   const copyAddress = async () => {
     console.log("copy");
     const addressGet = account;
+     //@ts-ignore
     copy(account?.toString());
     toast.success("🦄 Copy Successfull!");
   };
