@@ -38,7 +38,6 @@ export default function Header() {
 
   //Conenct to Metamask All Time
   const checkMetamask = async () => {
-    // alert("Trigger!")
     const localData = localStorage.getItem("metamaskAddress");
     if (localData !== undefined && localData !== null) {
       await activate(injected);
