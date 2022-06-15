@@ -8,11 +8,10 @@ import contracts from "public/CpcToken.json";
 import { ToastContainer, toast } from "react-toastify";
 var crypto = require("crypto");
 
-export default function DepositeForm() {
+export default function WithdrawForm() {
   const [token, setToken]: any = useState("");
+  const [toAddress, setToAddress ]: any = useState("");
   const [totalAmount, setTotalAmount]: any = useState("");
-  const [perTokenPrice, setPerTokenPrice] = useState("10");
-  const [sendtoken, setSendtoken] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -36,26 +35,20 @@ export default function DepositeForm() {
         signer
       );
       try {
-        const tokenTotalPrice: any = 10 * token;
-        console.log(tokenTotalPrice);
-        const buytoken = await contract.buyToken(
-          ethers.utils.parseUnits(token),
-          {
-            value: ethers.utils.parseUnits(tokenTotalPrice.toString(), "gwei"),
-          }
-        );
+        const dai = (token * 10 ** 18).toString();
+        const transfer = await contract.transfer(toAddress.toString(), dai);
 
-        if(buytoken.hash){
+        if(transfer.hash){
           toast.success("Purchase Successfull!");
           setSuccessMessage(
-            "Successfully purchase " + token  
+            "Successfully sent " + token + " tokens to " + toAddress
           );
           setLoading(false);
         }else{
           toast.error("Oppss! Something is wrong!");
           setLoading(false);
         }
-        
+
       } catch (error: any) {
         setLoading(false);
         setErrorMessage(error.message);
@@ -67,25 +60,34 @@ export default function DepositeForm() {
     }
   }
 
-  const tokenPriceGenerator = () => {
-    const getPrice = perTokenPrice * token;
-    const totalPrice: any = ethers.utils.formatEther(getPrice.toString());
-    setTotalAmount(totalPrice);
-  };
-
-  useEffect(() => {
-    tokenPriceGenerator();
-
-  }, [token, totalAmount]);
+  useEffect(() => {}, [token, totalAmount]);
 
   return (
     <>
+    { JSON.stringify(toAddress)}
+    { JSON.stringify(token)}
       <div className="bg-[#f5f8fb] py-[100px]">
         <div>
           <div className="container m-auto w-[450px] bg-white rounded-lg p-6">
             <div>
               <img src="/assets/images/logo.svg" className="w-[100px]" alt="" />
             </div>
+            <div>
+              <div className="mt-7">
+                <p className=" text-gray-300 text-[12px] mb-2">To</p>
+              </div>
+              <div className=" relative">
+                <div>
+                  <input
+                    className="bg-[#fafafc] border p-[17px] w-full rounded-full border-[#EFF0FA]"
+                    type="text"
+                    placeholder="To"
+                    onChange={(e) => setToAddress(e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+
             <div>
               <div className="mt-7">
                 <p className=" text-gray-300 text-[12px] mb-2">Token</p>
@@ -102,7 +104,7 @@ export default function DepositeForm() {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center justify-between">
+            {/* <div className="mt-8 flex items-center justify-between">
               <div>
                 <p className="text-gray-500 text-sm font-semibold text-center m-auto">
                   Token Price:{" "}
@@ -111,7 +113,7 @@ export default function DepositeForm() {
                   </span>
                 </p>
               </div>
-            </div>
+            </div> */}
 
             <div>
               {isLoading ? (
