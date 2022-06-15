@@ -231,7 +231,7 @@ export default function Header() {
                       </div>
                       <div className="flex items-center gap-3">
                         <div className="text-[14px] text-gray-600">
-                          0xC095768Dd0FcD7Ba8f2Fbfb0DF6Ff8337113A5E3
+                          { account ? account : "Loading..." }
                         </div>
                         <div>
                           <svg

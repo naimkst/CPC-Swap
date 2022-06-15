@@ -75,6 +75,7 @@ export default function DepositeForm() {
 
   useEffect(() => {
     tokenPriceGenerator();
+
   }, [token, totalAmount]);
 
   return (
