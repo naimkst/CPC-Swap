@@ -5,7 +5,6 @@ import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { ethers } from "ethers";
-import contracts from "../../public/MyToken.json";
 import { disconnect } from "process";
 var crypto = require("crypto");
 import * as copy from "copy-to-clipboard";

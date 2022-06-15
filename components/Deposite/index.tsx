@@ -11,7 +11,7 @@ var crypto = require("crypto");
 export default function DepositeForm() {
   const [token, setToken]: any = useState("");
   const [totalAmount, setTotalAmount]: any = useState("");
-  const [perTokenPrice, setPerTokenPrice] = useState("10");
+  const [perTokenPrice, setPerTokenPrice]: any = useState("10");
   const [sendtoken, setSendtoken] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -68,7 +68,7 @@ export default function DepositeForm() {
   }
 
   const tokenPriceGenerator = () => {
-    const getPrice = perTokenPrice * token;
+    const getPrice: any = perTokenPrice * token;
     const totalPrice: any = ethers.utils.formatEther(getPrice.toString());
     setTotalAmount(totalPrice);
   };
