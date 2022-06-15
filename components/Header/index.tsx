@@ -33,7 +33,7 @@ export default function Header() {
 
   if (active) {
     console.log(active);
-    const setAddressLocal = localStorage.setItem("metamaskAddress", account);
+    const setAddressLocal = localStorage.setItem("metamaskAddress", account ? account : "" );
   }
 
   //Conenct to Metamask All Time
@@ -58,7 +58,7 @@ export default function Header() {
   const getAddressLocal = async () => {
     if (library) {
       const { provider: ethereum } = library;
-      ethereum.on("accountsChanged", async () => {
+      ethereum.on("account  ? sChanged", async () => {
         const addr = await library.listAccounts();
 
         console.log("#########", addr.length);
@@ -74,7 +74,7 @@ export default function Header() {
           console.log("Add Item account");
           const setAddressLocal = await localStorage.setItem(
             "metamaskAddress",
-            account
+            account? account : ""
           );
           // window.location.reload();
         }
