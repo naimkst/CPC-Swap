@@ -122,7 +122,7 @@ export default function Header() {
 
   return (
     <>
-      {JSON.stringify(active)}
+      {/* {JSON.stringify(active)} */}
       <div className=" bg-slate-100">
         <div className="container flex items-center justify-between m-auto h-[80px]">
           <div>

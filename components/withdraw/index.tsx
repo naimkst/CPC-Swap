@@ -57,6 +57,9 @@ export default function WithdrawForm() {
     } else {
       setLoading(false);
       console.log("Please install MetaMask");
+      setErrorMessage("Please connect with MetaMask");
+      toast.error("Please connect with MetaMask");
+      
     }
   }
 
@@ -64,8 +67,6 @@ export default function WithdrawForm() {
 
   return (
     <>
-    { JSON.stringify(toAddress)}
-    { JSON.stringify(token)}
       <div className="bg-[#f5f8fb] py-[100px]">
         <div>
           <div className="container m-auto w-[450px] bg-white rounded-lg p-6">
