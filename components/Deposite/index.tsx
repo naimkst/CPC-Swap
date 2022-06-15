@@ -15,6 +15,7 @@ export default function DepositeForm() {
   const [sendtoken, setSendtoken] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isLoading, setLoading] = useState(false);
   const {
     active,
     activate,
@@ -25,6 +26,7 @@ export default function DepositeForm() {
   } = useWeb3React();
 
   async function execute() {
+    setLoading(true);
     if (active) {
       console.log("exicute");
       const signer = provider.getSigner();
@@ -34,7 +36,6 @@ export default function DepositeForm() {
         signer
       );
       try {
-       
         const tokenTotalPrice: any = 10 * token;
         console.log(tokenTotalPrice);
         const buytoken = await contract.buyToken(
@@ -43,12 +44,25 @@ export default function DepositeForm() {
             value: ethers.utils.parseUnits(tokenTotalPrice.toString(), "gwei"),
           }
         );
-   
+        console.log(buytoken.hash);
+        if(buytoken.hash){
+          toast.success("Purchase Successfull!");
+          setSuccessMessage(
+            "Successfully purchase " + token  
+          );
+          setLoading(false);
+        }else{
+          toast.error("Oppss! Something is wrong!");
+          setLoading(false);
+        }
+        
       } catch (error: any) {
+        setLoading(false);
         setErrorMessage(error.message);
         console.log(error.message);
       }
     } else {
+      setLoading(false);
       console.log("Please install MetaMask");
     }
   }
@@ -65,7 +79,6 @@ export default function DepositeForm() {
 
   return (
     <>
-      {JSON.stringify(token)}
       <div className="bg-[#f5f8fb] py-[100px]">
         <div>
           <div className="container m-auto w-[450px] bg-white rounded-lg p-6">
@@ -93,23 +106,34 @@ export default function DepositeForm() {
                 <p className="text-gray-500 text-sm font-semibold text-center m-auto">
                   Token Price:{" "}
                   <span className="text-[#5f4dbc]">
-                  10 Wei X {token ? token : 0} = {totalAmount} ETH
+                    10 Wei X {token ? token : 0} = {totalAmount} ETH
                   </span>
                 </p>
               </div>
             </div>
 
             <div>
-              <button
-                onClick={() => execute()}
-                className="py-[15px] text-white rounded-full mt-7 w-full bg-[#5f4dbc]"
-              >
-                Connect Wallet
-              </button>
+              {isLoading ? (
+                <div className="w-16 h-16 mt-8 border-[8px] border-dashed rounded-full animate-spin border-[#5f4dbc] m-auto"></div>
+              ) : (
+                <button
+                  onClick={() => execute()}
+                  className="py-[15px] text-white rounded-full mt-7 w-full bg-[#5f4dbc]"
+                >
+                  Connect Wallet
+                </button>
+              )}
 
-              {errorMessage && <p className="error text-center mt-3 text-red-500">{errorMessage}dfd</p>}
-              {successMessage && <p className="success text-center mt-3 text-green-600">{successMessage}dfd</p>}
-
+              {errorMessage && (
+                <p className="error text-center mt-3 text-red-500">
+                  {errorMessage}dfd
+                </p>
+              )}
+              {successMessage && (
+                <p className="success text-center mt-3 text-green-600">
+                  {successMessage}dfd
+                </p>
+              )}
             </div>
           </div>
         </div>
